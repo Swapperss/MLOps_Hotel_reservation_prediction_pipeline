@@ -1,0 +1,4 @@
+venv/
+mlruns/
+logs/
+hotel_reservation_prediction_MLOps_GCP.egg-info/
