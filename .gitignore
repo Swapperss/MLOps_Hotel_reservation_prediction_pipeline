@@ -1,9 +1,7 @@
-<<<<<<< HEAD
 venv/
 mlruns/
 logs/
 hotel_reservation_prediction_MLOps_GCP.egg-info/
-=======
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[codz]
@@ -211,4 +209,3 @@ cython_debug/
 marimo/_static/
 marimo/_lsp/
 __marimo__/
->>>>>>> 142da348a7471739a5c88cfd8a25e25bf8dc0f81
