@@ -22,10 +22,11 @@ pipeline{
                 script{
                     echo 'Setting up Python Virtual Environment and Installing Dependencies'
                     sh '''
-                        python3 -m venv ${VENV_DIR}
+                        apt-get update && apt-get install -y python3.11 python3.11-venv python3.11-distutils
+                        python3.11 -m venv ${VENV_DIR}
                         . ${VENV_DIR}/bin/activate
-                        pip install --upgrade pip
-                        pip install -r requirements.txt
+                        python3.11 -m pip install --upgrade pip
+                        python3.11 -m pip install -r requirements.txt
                     '''
                 }
             }
