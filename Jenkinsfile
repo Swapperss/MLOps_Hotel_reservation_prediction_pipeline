@@ -3,6 +3,8 @@ pipeline{
 
         environment{
             VENV_DIR = 'venv'
+            GCP_PROJECT = "mlops-479111"
+            GCLOUD_PATH = "/var/jenkins_home/google-cloud-sdk/bin"
         }
 
     stages{
@@ -27,6 +29,24 @@ pipeline{
                     '''
                 }
             }
+        }
+        stage('Building and pushing Docker image to GCR'){
+            steps{
+                withCredentials([file(credentialsId: 'gcp-key', variable: 'GOOGLE_APPLICATION_CREDENTIALS')]) {
+                    script{
+                        echo 'Building and pushing Docker image to GCR.............'
+                        sh '''
+                            . ${VENV_DIR}/bin/activate
+                            export PATH=${GCLOUD_PATH}:$PATH
+                            gcloud auth activate-service-account --key-file=${GOOGLE_APPLICATION_CREDENTIALS}
+                            gcloud config set project ${GCP_PROJECT}
+                            gcloud auth configure-docker --quiet
+                            IMAGE_NAME="gcr.io/${GCP_PROJECT}/hotel-reservation-prediction:latest"
+                            docker build -t $IMAGE_NAME .
+                            docker push $IMAGE_NAME
+                        '''
+                    }
+                }
         }
     }
 }
