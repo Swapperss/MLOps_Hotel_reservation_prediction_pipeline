@@ -19,7 +19,7 @@ class customException(Exception):
             print(10/0)
           ~~^~
         ZeroDivisionError: division by zero'''
-        _, _, exc_tb = error_detail.exc_info() #to get the exception info traceback details only
+        _, _, exc_tb = traceback.sys.exc_info() #to get the exception info traceback details only
         line_number = exc_tb.tb_lineno # to get the line number where error occurred like line 1 in test.py
         file_name = exc_tb.tb_frame.f_code.co_filename #to get the file name where error occurred like test.py
 
